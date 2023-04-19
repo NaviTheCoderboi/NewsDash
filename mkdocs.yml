@@ -1,0 +1,61 @@
+site_name: NewsDash Documentation
+site_description: An awsome documentation for newsdasg,an async api wrapper for NewsApi.
+repo_url: https://github.com/NaviTheCoderboi/NewsDash
+site_author: NaviTheCoderboi
+copyright: Copyright NaviTheCoderboi ( 2023 - present )
+site_url: https://NaviTheCoderboi.github.io/NewsDash
+
+theme:
+  name: "material"
+  logo: assets/poster.jpg
+  favicon: assets/poster.jpg
+
+  features:
+    - navigation.tracking
+    - navigation.instant
+    - navigation.tabs
+    - content.code.annotate
+    - navigation.instant
+    - toc.follow
+    - content.code.copy
+
+  palette:
+    - scheme: light
+      toggle:
+        icon: material/weather-sunny
+        name: Light Mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Dark Mode
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            merge_init_into_class: false
+            inherited_members: true
+          import:
+            - https://docs.python.org/3.9/objects.inv
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.superfences
+
+nav:
+  - Getting Started: index.md
+  - Guides:
+    - Basic: guides/basic.md
+  - Api Reference:
+    - NewsDash: api_reference/NewsDash.md
