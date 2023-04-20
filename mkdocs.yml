@@ -5,6 +5,12 @@ site_author: NaviTheCoderboi
 copyright: Copyright NaviTheCoderboi ( 2023 - present )
 site_url: https://NaviTheCoderboi.github.io/NewsDash
 
+extra:
+  social:
+    - icon: material/github
+      url: https://github.com/NaviTheCoderboi/NewsDash
+  version: 0.1.0
+
 theme:
   name: "material"
   logo: assets/poster.jpg
@@ -18,6 +24,7 @@ theme:
     - navigation.instant
     - toc.follow
     - content.code.copy
+    - navigation.path
 
   palette:
     - scheme: light
@@ -59,3 +66,4 @@ nav:
     - Basic: guides/basic.md
   - Api Reference:
     - NewsDash: api_reference/NewsDash.md
+    - HttpClient: api_reference/HttpClient.md

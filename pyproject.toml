@@ -6,6 +6,7 @@ license = "MIT"
 authors = ["NaviTheCoderboi <navindersingh568@gmail.com>"]
 readme = "README.md"
 repository = "https://github.com/NaviTheCoderboi/NewsDash"
+documentation = "https://NaviTheCoderboi.github.io/NewsDash"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha"
 ]

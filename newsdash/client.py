@@ -54,6 +54,7 @@ class NewsDash:
             Custom ClientSession you want the client to use., by default None
         file_logging : typing.Union[bool,list[os.PathLike,typing.Union[bool, str],typing.Union[bool, str],typing.Union[bool, str],],], optional
             Custom ClientSession you want the client to use., by default False
+
         Returns
         -------
         NewsDash
@@ -271,7 +272,7 @@ class NewsDash:
                 raise TypeError("page should be an integer")
             params["page"] = page
         headers = {"X-Api-Key": self.api_key}
-        data = await self._http_client.get(
+        data = await self._http_client.request(
             "https://newsapi.org/v2/everything", "GET", headers=headers, params=params
         )
         if data:
@@ -480,7 +481,7 @@ class NewsDash:
                 raise TypeError("page should be an integer")
             params["page"] = page
         headers = {"X-Api-Key": self.api_key}
-        data = await self._http_client.get(
+        data = await self._http_client.request(
             "https://newsapi.org/v2/top-headlines",
             "GET",
             headers=headers,
@@ -702,7 +703,7 @@ class NewsDash:
                     "language should be one out of languages provided by newsapi"
                 )
         headers = {"X-Api-Key": self.api_key}
-        data = await self._http_client.get(
+        data = await self._http_client.request(
             "https://newsapi.org/v2/top-headlines",
             "GET",
             headers=headers,
