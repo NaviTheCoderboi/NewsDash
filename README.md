@@ -1,4 +1,4 @@
-![NewsDash](./assets/poster.jpg)
+![NewsDash](./readme-assets/poster.jpg)
 # NewsDash
 [![Python 3.9-3.11](https://img.shields.io/badge/Python-3.9--3.11-blue.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
