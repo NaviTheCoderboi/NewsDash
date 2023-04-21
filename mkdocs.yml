@@ -9,7 +9,7 @@ extra:
   social:
     - icon: material/github
       url: https://github.com/NaviTheCoderboi/NewsDash
-  version: 0.1.0
+  version: 0.1.0a0
 
 theme:
   name: "material"
