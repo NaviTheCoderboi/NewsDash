@@ -5,7 +5,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![GitHub stars](https://img.shields.io/github/stars/NaviTheCoderboi/NewsDash.svg)](https://github.com/NaviTheCoderboi/NewsDash)
 ![GitHub last commit](https://img.shields.io/github/last-commit/NaviTheCoderboi/NewsDash.svg)
-[![PyPI version](https://badge.fury.io/py/newsdash.svg)](https://badge.fury.io/py/newsdash)
+![](https://img.shields.io/pypi/v/newsdash?style=flat-square)
 
 ***
 NewsDash is a fast and reliable Python wrapper for the News API that simplifies accessing the latest news articles from around the world. 📰
