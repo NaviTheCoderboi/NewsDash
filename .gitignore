@@ -5,8 +5,7 @@ __pycache__/
 *$py.class
 
 # my
-key.txt
-main.py
+testing/*
 
 
 # C extensions

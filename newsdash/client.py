@@ -1,11 +1,49 @@
 import typing as tp
-from .http import HttpClient
+from ._http import HttpClient
 import loguru
 
 if tp.TYPE_CHECKING:
     import aiohttp
     import os
     from types import TracebackType
+
+
+class articleType(tp.TypedDict):
+    source: tp.TypedDict("source", {"id": str, "name": str})
+    author: str
+    title: str
+    description: str
+    url: str
+    urlToImage: str
+    publishedAt: str
+    content: str
+
+
+class newsapiGetEverythingResponse(tp.TypedDict):
+    status: tp.Literal["ok", "error"]
+    totalResults: int
+    articles: list[articleType]
+
+
+class newsapiGetTopHeadlinesResponse(tp.TypedDict):
+    status: tp.Literal["ok", "error"]
+    totalResults: int
+    articles: list[articleType]
+
+
+class sourceType(tp.TypedDict):
+    id: str
+    name: str
+    description: str
+    url: str
+    category: str
+    language: str
+    country: str
+
+
+class newsapiGetSourcesResponse(tp.TypedDict):
+    status: tp.Literal["ok", "error"]
+    sources: list[sourceType]
 
 
 class NewsDash:
@@ -53,7 +91,7 @@ class NewsDash:
         session : typing.Optional[aiohttp.ClientSession], optional
             Custom ClientSession you want the client to use., by default None
         file_logging : typing.Union[bool,list[os.PathLike,typing.Union[bool, str],typing.Union[bool, str],typing.Union[bool, str],],], optional
-            Custom ClientSession you want the client to use., by default False
+            configuration for the file logging, by default False
 
         Returns
         -------
@@ -62,7 +100,7 @@ class NewsDash:
         """
         self.logger = loguru.logger
         self.api_key = api_key
-        if file_logging != False:
+        if file_logging is not False:
             file = file_logging[0]
             if len(file_logging) > 1 and file_logging[1]:
                 rotation = file_logging[1]
@@ -87,8 +125,7 @@ class NewsDash:
         exc_val: tp.Optional[BaseException],
         exc_tb: tp.Optional["TracebackType"],
     ) -> None:
-        if self._http_client.session is not None:
-            await self._http_client.session.close()
+        await self.close()
 
     async def __aenter__(self) -> "NewsDash":
         return self
@@ -173,7 +210,7 @@ class NewsDash:
 
         Returns
         -------
-        typing.Any
+        newsapiGetEverythingResponse
             The response from NewsApi after getting news.
 
         Raises
@@ -272,7 +309,7 @@ class NewsDash:
                 raise TypeError("page should be an integer")
             params["page"] = page
         headers = {"X-Api-Key": self.api_key}
-        data = await self._http_client.request(
+        data: newsapiGetEverythingResponse = await self._http_client.request(
             "https://newsapi.org/v2/everything", "GET", headers=headers, params=params
         )
         if data:
@@ -376,7 +413,7 @@ class NewsDash:
 
         Raises
         ------
-        HTTPException
+        newsapiGetTopHeadlinesResponse
             raises HTTPException if the status code is not `ok`.
 
         Examples
@@ -481,7 +518,7 @@ class NewsDash:
                 raise TypeError("page should be an integer")
             params["page"] = page
         headers = {"X-Api-Key": self.api_key}
-        data = await self._http_client.request(
+        data: newsapiGetTopHeadlinesResponse = await self._http_client.request(
             "https://newsapi.org/v2/top-headlines",
             "GET",
             headers=headers,
@@ -589,7 +626,7 @@ class NewsDash:
 
         Returns
         -------
-         typing.Any
+        newsapiGetSourcesResponse
             The response from NewsApi after getting sources.
 
         Raises
@@ -703,7 +740,7 @@ class NewsDash:
                     "language should be one out of languages provided by newsapi"
                 )
         headers = {"X-Api-Key": self.api_key}
-        data = await self._http_client.request(
+        data: newsapiGetSourcesResponse = await self._http_client.request(
             "https://newsapi.org/v2/top-headlines",
             "GET",
             headers=headers,

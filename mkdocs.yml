@@ -9,7 +9,7 @@ extra:
   social:
     - icon: material/github
       url: https://github.com/NaviTheCoderboi/NewsDash
-  version: 0.1.0a1
+  version: 0.1.1a0
 
 theme:
   name: "material"
@@ -66,4 +66,3 @@ nav:
       - Basic: guides/basic.md
   - Api Reference:
       - NewsDash: api_reference/NewsDash.md
-      - HttpClient: api_reference/HttpClient.md

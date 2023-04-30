@@ -6,6 +6,12 @@ if tp.TYPE_CHECKING:
     import loguru
 
 
+class errorResponse(tp.TypedDict):
+    status: tp.Literal["ok", "error"]
+    code: str
+    message: str
+
+
 class HttpClient:
     """
     The HTTP client that NewsDash is using
@@ -68,28 +74,26 @@ class HttpClient:
 
         Returns
         -------
-        tp.Any
+        dict
             The response from api.
 
         Raises
         ------
         HTTPException.from_response
             If you get bad response codes.
-        HTTPException
-            If the session is not provided
         """
         if self.session is None:
             await self.connect()
-        if self.session is not None:
-            async with self.session.request(
-                method, url, params=params, headers=headers
-            ) as response:
-                if 300 > response.status >= 200:
-                    return await response.json()
-                else:
-                    resp = await response.json()
-                    message = f"received status code {response.status} with code > {resp['code']}"
-                    self.logger.error(message)
-                    raise HTTPException.from_response(await response.json())
-        else:
-            raise HTTPException("No session was provided")
+        async with self.session.request(
+            method, url, params=params, headers=headers
+        ) as response:
+            if 300 > response.status >= 200:
+                response = await response.json()
+                return response
+            else:
+                resp: errorResponse = await response.json()
+                message = (
+                    f"received status code {response.status} with code > {resp['code']}"
+                )
+                self.logger.error(message)
+                raise HTTPException.from_response(await response.json())
