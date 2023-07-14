@@ -44,6 +44,7 @@ async def get_news():
   print(await cl.get_everything(query="tech",pageSize=5))
   print(await cl.get_top_headlines(query="Microsoft"))
   print(await cl.get_sources(country="in",language="en"))
+  await cl.close()
 
 asyncio.run(get_news())
 ```
